@@ -1,89 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Progress Bar</title>
-	<style>
-		body {
-			background-color: white;
-		}
-		#progress-bar {
-			background-color: transparent;
-			height: 40px;
-			width: 80%;
-			border-radius: 50px;
-			padding: 16px;
-			box-sizing: border-box;
-			position: relative;
-			border: 2px solid grey;
-			overflow: hidden;
-			margin: 20px auto 0;
-		}
-		.progress-bar-fill {
-			background-color: #00FF7F;
-			height: 100%;
-			width: 0%;
-			transition: width 0.5s ease-in-out;
-			position: absolute;
-			top: 0;
-			left: 0;
-		}
-		#increment-button {
-			display: block;
-			margin: 0 auto;
-			margin-top: 15%;
-		}
-		.progress-bar-labels {
-			display: flex;
-			justify-content: space-between;
-			margin-top: 10px;
-			margin: 20px auto;
-			width: 80%;
-			font-size: 14px;
-			color: #999;
-			text-align: center;
-		}
-		.progress-bar-label {
-			flex-basis: 16.6667%;
-			box-sizing: border-box;
-			padding: 0 8px;
-			border-left: 1px solid #999;
-			border-right: 1px solid #999;
-		}
-        .heading{
-            text-align: center;
-        }
-	</style>
+  <title>Progress Bar</title>
+  <style>
+    body {
+      background-color: white;
+    }
+    #progress-bar {
+      background-color: transparent;
+      height: 40px;
+      width: 80%;
+      border-radius: 50px;
+      padding: 16px;
+      box-sizing: border-box;
+      position: relative;
+      border: 2px solid grey;
+      overflow: hidden;
+      margin: 20px auto 0;
+    }
+    .progress-bar-fill {
+      background-color: #00FF7F;
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease-in-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    #increment-button {
+      display: block;
+      margin: 0 auto;
+      margin-top: 15%;
+    }
+    .progress-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      margin: 20px auto;
+      width: 80%;
+      font-size: 14px;
+      color: #999;
+      text-align: center;
+    }
+    .progress-bar-label {
+      flex-basis: 16.6667%;
+      box-sizing: border-box;
+      padding: 0 8px;
+      border-left: 1px solid #999;
+      border-right: 1px solid #999;
+    }
+    .heading{
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <h2 class="heading">Welcome to my Demo Site</h2>
-    <h1 class="heading">Progress Bar</h1>
-    <hr>
-	<button id="increment-button">Increment Progress</button>
-	<div id="progress-bar">
-		<div class="progress-bar-fill"></div>
-	</div>
-	<div class="progress-bar-labels">
-		<div class="progress-bar-label">0 - 10%</div>
-		<div class="progress-bar-label">10 - 20%</div>
-		<div class="progress-bar-label">20 - 30%</div>
-		<div class="progress-bar-label">30 - 40%</div>
-		<div class="progress-bar-label">40 - 50%</div>
-        <div class="progress-bar-label">50 - 60%</div>
-        <div class="progress-bar-label">60 - 70%</div>
-        <div class="progress-bar-label">70 - 80%</div>
-        <div class="progress-bar-label">80 - 90%</div>
-        <div class="progress-bar-label">90 - 100%</div>
-	</div>
-	<script>
-		const progressBar = document.getElementById('progress-bar');
-		const progressBarFill = document.querySelector('.progress-bar-fill');
-		const incrementButton = document.getElementById('increment-button');
-		let progress = 0;
+  <h2 class="heading">Welcome to my Demo Site</h2>
+  <h1 class="heading">Progress Bar</h1>
+  <hr>
+  <button id="increment-button">Increment Progress</button>
+  <div id="progress-bar">
+    <div class="progress-bar-fill"></div>
+  </div>
+  <div class="progress-bar-labels">
+    <div class="progress-bar-label">0 - 10%</div>
+    <div class="progress-bar-label">10 - 20%</div>
+    <div class="progress-bar-label">20 - 30%</div>
+    <div class="progress-bar-label">30 - 40%</div>
+    <div class="progress-bar-label">40 - 50%</div>
+    <div class="progress-bar-label">50 - 60%</div>
+    <div class="progress-bar-label">60 - 70%</div>
+    <div class="progress-bar-label">70 - 80%</div>
+    <div class="progress-bar-label">80 - 90%</div>
+    <div class="progress-bar-label">90 - 100%</div>
+  </div>
+  <script>
+    const progressBar = document.getElementById('progress-bar');
+    const progressBarFill = document.querySelector('.progress-bar-fill');
+    const incrementButton = document.getElementById('increment-button');
 
-		incrementButton.addEventListener('click', () => {
-			progress += 2.5;
-			progressBarFill.style.width = `${progress}%`;
-		});
-	</script>
+    // Get the progress value from local storage if it exists, otherwise initialize it to 0.
+    let progress = parseInt(localStorage.getItem('progress')) || 0;
+
+    // Update the progress bar with the initial progress value.
+    progressBarFill.style.width = `${progress}%`;
+
+    incrementButton.addEventListener('click', () => {
+      progress += 2.5;
+      progressBarFill.style.width = `${progress}%`;
+
+      // Save the new progress value to local storage.
+      localStorage.setItem('progress', progress);
+    });
+  </script>
 </body>
 </html>
